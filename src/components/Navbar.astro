@@ -10,7 +10,7 @@ const navbarItems = ['Projects', 'People']
   <ul class="flex items-center gap-8">
     {
       navbarItems.map((item) => (
-        <li>
+        <li class="max-sm:hidden">
           <a href={'#' + item.toLowerCase()}>{item}</a>
         </li>
       ))

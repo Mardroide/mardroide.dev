@@ -1,0 +1,22 @@
+---
+const navbarItems = ['Projects', 'People']
+---
+
+<nav class="flex items-center justify-between p-5">
+  <a href="/" class="flex items-center gap-3">
+    <img src="/mardroide.ico" alt="Logo" class="w-8 h-8" />
+    <p class="font-medium">Mardroide</p>
+  </a>
+  <ul class="flex items-center gap-8">
+    {
+      navbarItems.map((item) => (
+        <li>
+          <a href={'#' + item.toLowerCase()}>{item}</a>
+        </li>
+      ))
+    }
+    <li>
+      <a href="/blog">Blog</a>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,78 @@
+---
+export interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Mardroide - Portfolio</title>
+    <meta name="description" content="My personal portfolio made with astro." />
+    <meta property="og:url" content="https://mardroide.dev" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mardroide - Portfolio" />
+    <meta
+      property="og:description"
+      content="My personal portfolio made with astro."
+    />
+    <meta property="og:image" content="https://mardroide.dev/opengraph.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="theme-color" content="#8A2BE2" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="mardroide.dev" />
+    <meta property="twitter:url" content="https://mardroide.dev" />
+    <meta name="twitter:title" content="Mardroide - Portfolio" />
+    <meta
+      name="twitter:description"
+      content="My personal portfolio made with astro."
+    />
+    <meta name="twitter:image" content="https://mardroide.dev/opengraph.png" />
+
+    <link rel="icon" type="image/svg+xml" href="/mardroide.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="mx-auto max-w-7xl bg-main">
+    <slot />
+  </body>
+</html>
+<style is:global>
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    color: white;
+    scroll-behavior: smooth;
+    font-family: 'Rubik', sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #5c5c5c;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6c6c6c;
+  }
+</style>

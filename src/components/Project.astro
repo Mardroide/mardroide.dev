@@ -1,0 +1,47 @@
+---
+interface Props {
+  name: string
+  description: string
+  image: string
+  date: string
+  links: {
+    github: string
+    preview?: string
+  }
+}
+
+const { name, description, image, links, date } = Astro.props
+---
+
+<div
+  class="mx-auto flex flex-col items-start w-full p-5 gap-3 ring-1 ring-gray-500 rounded-lg hover:bg-second hover:scale-105 transition-all duration-200"
+>
+  <div class="flex items-center justify-between w-full">
+    <div class="flex items-center gap-4">
+      <img
+        src={image}
+        alt={image + 'logo'}
+        class="object-cover w-8 h-8 rounded-full"
+      />
+      <p class="font-bold text-lg">{name}</p>
+    </div>
+    <span class="text-gray-300 text-sm">{date}</span>
+  </div>
+  <p>{description}</p>
+  <div class="flex items-center gap-3 text-sm text-blue-400">
+    {
+      links.github !== undefined ? (
+        <a href={links.github} target="_blank">
+          Github
+        </a>
+      ) : null
+    }
+    {
+      links.preview !== undefined ? (
+        <a href={links.preview} target="_blank">
+          Preview
+        </a>
+      ) : null
+    }
+  </div>
+</div>

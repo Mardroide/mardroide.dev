@@ -1,0 +1,43 @@
+---
+import Person from './Person.astro'
+
+const PEOPLE = [
+  {
+    name: 'Plasmify',
+    description: 'My own organization. You can collaborate to get incredible advantages.',
+    image: 'https://avatars.githubusercontent.com/Plasmify',
+    link: 'https://plasmify.dev'
+  },
+  {
+    name: 'Waxer59',
+    description: 'A full-stack developer with crazy skills.',
+    image: 'https://avatars.githubusercontent.com/Waxer59',
+    link: 'https://wadev.dev'
+  },
+  {
+    name: 'Astro docs',
+    description: 'Help translating framework docs.',
+    image: 'https://avatars.githubusercontent.com/withastro',
+    link: 'https://astro.build'
+  }
+]
+---
+
+<div class="mx-auto flex flex-col flex-wrap gap-4 p-5 mb-32 max-sm:mb-10" id="people">
+  <div class="flex flex-col">
+    <h2 class="text-xl font-semibold">People and Organizations</h2>
+    <span>Here you can find all people and organizations I worked with.</span>
+  </div>
+  <ul class="grid grid-cols-3 gap-6 max-sm:flex max-sm:flex-col">
+    {
+      PEOPLE.map(({ name, description, image, link }) => (
+        <Person
+          name={name}
+          description={description}
+          image={image}
+          link={link}
+        />
+      ))
+    }
+  </ul>
+</div>

@@ -1,0 +1,59 @@
+---
+import Project from './Project.astro'
+
+const PROJECTS = [
+  {
+    name: 'My Portfolio',
+    description: 'A web page made with Astro. Here you can find all about me.',
+    image: 'https://avatars.githubusercontent.com/withastro',
+    date: '2023',
+    links: {
+      github: 'https://github.com/Mardroide/mardroide.dev',
+      preview: 'https://mardroide.dev'
+    }
+  },
+  {
+    name: 'Plasma discord bot',
+    description:
+      'A discord client to automatize the official server. Will be public.',
+    image: '/plasma-bot.webp',
+    date: '2023',
+    links: {
+      github: 'https://github.com/Plasmify/plasma-bot',
+      preview: 'https://discord.gg/4WV4Ys65x7'
+    }
+  },
+  {
+    name: 'Plasma-core plugin',
+    description:
+      'A Spigot plugin for plasmanet Minecraft Network. Still in development.',
+    image: '/spigot.webp',
+    date: '2023',
+    links: {
+      github: 'https://github.com/Plasmify/plasma-core'
+    }
+  }
+]
+---
+
+<div class="flex flex-col flex-wrap gap-4 p-5 pb-20" id="projects">
+  <div class="flex flex-col">
+    <h2 class="text-xl font-semibold">Projects</h2>
+    <span
+      >Here you can find all my featured projects. All of the are open source.</span
+    >
+  </div>
+  <ul class="grid grid-cols-3 gap-6 max-sm:flex max-sm:flex-col">
+    {
+      PROJECTS.map(({ name, description, image, date, links }) => (
+        <Project
+          name={name}
+          description={description}
+          image={image}
+          date={date}
+          links={links}
+        />
+      ))
+    }
+  </ul>
+</div>

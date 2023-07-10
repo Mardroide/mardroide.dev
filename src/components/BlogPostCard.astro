@@ -1,0 +1,18 @@
+---
+const { post } = Astro.props
+---
+
+<a
+  href={'blog/' + post.slug}
+  class="flex items-center justify-between w-1/2 p-5 bg-second rounded-lg hover:scale-105 transition duration-200 max-sm:w-[80%]"
+>
+  <div class="flex flex-col">
+    <h2 class="font-semibold text-xl">{post.data.title}</h2>
+    <p class="text-sm text-gray-400">{post.data.description}</p>
+  </div>
+  <img
+    src={post.data.image}
+    alt="Random Alt"
+    class="w-14 h-14 object-cover rounded-lg"
+  />
+</a>

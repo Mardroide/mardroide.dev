@@ -27,7 +27,7 @@
     "lint-staged": "^13.2.3"
   },
   "lint-staged": {
-    "*.{js,cjs,mjs,md,jsx,tsx}": [
+    "*.{js,cjs,mjs,jsx,tsx}": [
       "eslint --fix"
     ],
     "*": [

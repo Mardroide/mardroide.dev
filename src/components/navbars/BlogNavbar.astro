@@ -1,3 +1,6 @@
+---
+---
+
 <nav class="flex items-center justify-between p-5">
   <a href="/" class="flex items-center gap-3">
     <img src="/mardroide.ico" alt="Logo" class="w-8 h-8" />
@@ -9,15 +12,47 @@
     </li>
     <li class="max-sm:hidden">
       <div
-        class="flex items-center gap-2 px-2 py-1 border-second border-[1px] rounded-lg"
+        class="flex items-center gap-2 border-[1px] border-second px-2 py-1 rounded-lg"
       >
         👀
         <input
+          id="searchbox"
           type="text"
           placeholder="Search..."
           class="bg-transparent focus:outline-none"
         />
       </div>
+      <div id="hits"></div>
     </li>
   </ul>
 </nav>
+<script is:inline>
+  const search = instantsearch({
+    indexName: import.meta.env.ALGOLIA_INDEX_NAME,
+    searchClient: algoliasearch(
+      import.meta.env.ALGOLIA_APP_ID,
+      import.meta.env.ALGOLIA_SEARCH_ONLY_API_KEY
+    )
+  })
+  search.addWidgets([
+    instantsearch.widgets.searchBox({
+      container: '#searchbox'
+    }),
+
+    instantsearch.widgets.hits({
+      container: '#hits',
+      templates: {
+        item: `
+          <a href='/{{#helpers.highlight}}{ "attribute": "slug" }{{/helpers.highlight}}/'>
+            <h2 class="hit-name">
+              {{#helpers.highlight}}{ "attribute": "title" }{{/helpers.highlight}}
+            </h2>
+            <p>{{#helpers.highlight}}{ "attribute": "content" }{{/helpers.highlight}}...</p>
+          </a>
+      `
+      }
+    })
+  ])
+
+  search.start()
+</script>

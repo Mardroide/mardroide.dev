@@ -7,7 +7,7 @@ const posts = await getCollection('blog')
 ---
 
 <BlogLayout>
-  <div class="flex flex-col items-center justify-center mt-20">
+  <div class="flex flex-col items-center justify-center gap-10 mt-20">
     {posts.map((post) => <BlogPostCard {post} />)}
   </div>
 </BlogLayout>

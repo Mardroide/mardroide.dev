@@ -1,6 +1,3 @@
----
----
-
 <nav class="flex items-center justify-between p-5">
   <a href="/" class="flex items-center gap-3">
     <img src="/mardroide.ico" alt="Logo" class="w-8 h-8" />
@@ -22,17 +19,30 @@
           class="bg-transparent focus:outline-none"
         />
       </div>
-      <div id="hits"></div>
+      <div id="hits" class="absolute z-10 mt-[15px] w-full"></div>
     </li>
   </ul>
 </nav>
+<script
+  is:inline
+  src="https://cdn.jsdelivr.net/npm/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"
+  integrity="sha256-V3GHVlMSAsogT3wL0OY/l4d3fRLa56gNzlnzdIMBIWg="
+  crossorigin="anonymous"></script>
+<script
+  is:inline
+  src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.56.5/dist/instantsearch.production.min.js"
+  integrity="sha256-HUihzhULZfSeNdovzhTpVqRjWABpyZCeeuZAEmMH/VE="
+  crossorigin="anonymous"></script>
 <script is:inline>
+  const algoliaclient = algoliaclient(
+    import.meta.env.ALGOLIA_APP_ID,
+    import.meta.env.ALGOLIA_SEARCH_ONLY_API_KEY,
+    import.meta.env.ALGOLIA_INDEX_NAME
+  )
+
   const search = instantsearch({
     indexName: import.meta.env.ALGOLIA_INDEX_NAME,
-    searchClient: algoliasearch(
-      import.meta.env.ALGOLIA_APP_ID,
-      import.meta.env.ALGOLIA_SEARCH_ONLY_API_KEY
-    )
+    searchClient: algoliaclient
   })
   search.addWidgets([
     instantsearch.widgets.searchBox({
@@ -42,17 +52,16 @@
     instantsearch.widgets.hits({
       container: '#hits',
       templates: {
-        item: `
-          <a href='/{{#helpers.highlight}}{ "attribute": "slug" }{{/helpers.highlight}}/'>
-            <h2 class="hit-name">
-              {{#helpers.highlight}}{ "attribute": "title" }{{/helpers.highlight}}
-            </h2>
-            <p>{{#helpers.highlight}}{ "attribute": "content" }{{/helpers.highlight}}...</p>
-          </a>
-      `
+        item: `<a href="{{ link }}" class="bg-primary-color text-white p-6 shadow-lg w-full text-center rounded-lg">
+        {{ title }}
+        </a>`
       }
     })
   ])
+
+  instantsearch.widgets.configure({
+    hitsPerPage: 5
+  })
 
   search.start()
 </script>

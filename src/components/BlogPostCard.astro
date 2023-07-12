@@ -11,8 +11,8 @@ const { post } = Astro.props
     <p class="text-sm text-gray-400">{post.data.description}</p>
   </div>
   <img
-    src={post.data.customData}
-    alt={post.slug.split('/')[0]}
+    src={post.data.image}
+    alt={post.id}
     class="w-14 h-14 object-cover rounded-lg"
   />
 </a>

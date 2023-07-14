@@ -1,0 +1,11 @@
+---
+import Layout from './Layout.astro'
+import BlogNavbar from '../components/navbars/BlogNavbar.astro'
+
+const { title } = Astro.props
+---
+
+<Layout title={title}>
+  <BlogNavbar />
+  <slot />
+</Layout>

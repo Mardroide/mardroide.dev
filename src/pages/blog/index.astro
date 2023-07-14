@@ -1,15 +1,15 @@
 ---
 import { getCollection } from 'astro:content'
-import Layout from '../../layouts/Layout.astro'
-import BlogNavbar from '../../components/navbars/BlogNavbar.astro'
+import BlogLayout from '../../layouts/BlogLayout.astro'
 import BlogPostCard from '../../components/BlogPostCard.astro'
 
-const posts = await getCollection('blog')
+const posts = (await getCollection('blog')).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+)
 ---
 
-<Layout title="Mardroide - blog">
-  <BlogNavbar />
-  <div class="flex flex-col items-center justify-center mt-20">
+<BlogLayout>
+  <div class="flex flex-col items-center justify-center gap-10 mt-20">
     {posts.map((post) => <BlogPostCard {post} />)}
   </div>
-</Layout>
+</BlogLayout>

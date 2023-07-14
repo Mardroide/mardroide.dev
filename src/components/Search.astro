@@ -1,0 +1,63 @@
+<div class="relative">
+  <div
+    class="flex items-center gap-2 border-[1px] border-second rounded-lg px-2 py-1"
+  >
+    👀
+    <div id="searchbox"></div>
+  </div>
+  <div id="hits" class="absolute z-10 mt-2 w-full"></div>
+</div>
+
+<script>
+  import algoliasearch from 'algoliasearch'
+  import instantsearch from 'instantsearch.js'
+  import { searchBox, hits } from 'instantsearch.js/es/widgets'
+
+  const ALGOLIA_APP_ID = 'RHMCJQHV4Q'
+  const ALGOLIA_SEARCH_ONLY_KEY = 'd2aba2c01d5c64982aa9fa1e11088229'
+
+  const search = instantsearch({
+    indexName: 'post_index',
+    searchClient: algoliasearch(ALGOLIA_APP_ID, ALGOLIA_SEARCH_ONLY_KEY),
+    searchFunction(helper) {
+      const hits = document.querySelector('#hits')
+
+      if (helper.state.query?.trim() !== '') {
+        hits!.classList.remove('hidden')
+        helper.search()
+      } else {
+        hits!.classList.add('hidden')
+      }
+    }
+  })
+
+  search.addWidgets([
+    searchBox({
+      container: '#searchbox',
+      cssClasses: {
+        input: 'bg-transparent focus:outline-none',
+        form: 'bg-transparent'
+      },
+      placeholder: 'Search...',
+      showSubmit: false,
+      showLoadingIndicator: false,
+      autofocus: false,
+      showReset: false
+    }),
+
+    hits({
+      container: '#hits',
+      cssClasses: {
+        item: 'bg-second rounded-lg px-2 py-1',
+        emptyRoot: 'bg-second rounded-lg px-2 py-1 w-full'
+      },
+      templates: {
+        item(hit, { html, components }) {
+          return html`<a href="${hit.objectID}"> ${hit.title} </a>`
+        }
+      }
+    })
+  ])
+
+  search.start()
+</script>

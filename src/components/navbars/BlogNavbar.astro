@@ -1,6 +1,10 @@
+---
+import Search from '../Search.astro'
+---
+
 <nav class="flex items-center justify-between p-5">
   <a href="/" class="flex items-center gap-3">
-    <img src="/mardroide.ico" alt="Logo" class="w-8 h-8" />
+    <img src="/favicon.ico" alt="Logo" class="w-8 h-8" />
     <p class="font-medium">Mardroide</p>
   </a>
   <ul class="flex items-center gap-8">
@@ -8,16 +12,7 @@
       <a href="/">Home</a>
     </li>
     <li class="max-sm:hidden">
-      <div
-        class="flex items-center gap-2 px-2 py-1 border-second border-[1px] rounded-lg"
-      >
-        👀
-        <input
-          type="text"
-          placeholder="Search..."
-          class="bg-transparent focus:outline-none"
-        />
-      </div>
+      <Search />
     </li>
   </ul>
 </nav>

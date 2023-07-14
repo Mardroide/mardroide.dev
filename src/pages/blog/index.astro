@@ -3,7 +3,9 @@ import { getCollection } from 'astro:content'
 import BlogLayout from '../../layouts/BlogLayout.astro'
 import BlogPostCard from '../../components/BlogPostCard.astro'
 
-const posts = await getCollection('blog')
+const posts = (await getCollection('blog')).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+)
 ---
 
 <BlogLayout>

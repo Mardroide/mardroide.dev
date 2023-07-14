@@ -1,6 +1,10 @@
+---
+import Search from '../Search.astro'
+---
+
 <nav class="flex items-center justify-between p-5">
   <a href="/" class="flex items-center gap-3">
-    <img src="/mardroide.ico" alt="Logo" class="w-8 h-8" />
+    <img src="/favicon.ico" alt="Logo" class="w-8 h-8" />
     <p class="font-medium">Mardroide</p>
   </a>
   <ul class="flex items-center gap-8">
@@ -8,60 +12,7 @@
       <a href="/">Home</a>
     </li>
     <li class="max-sm:hidden">
-      <div
-        class="flex items-center gap-2 border-[1px] border-second px-2 py-1 rounded-lg"
-      >
-        👀
-        <input
-          id="searchbox"
-          type="text"
-          placeholder="Search..."
-          class="bg-transparent focus:outline-none"
-        />
-      </div>
-      <div id="hits" class="absolute z-10 mt-[15px] w-full"></div>
+      <Search />
     </li>
   </ul>
 </nav>
-<script
-  is:inline
-  src="https://cdn.jsdelivr.net/npm/algoliasearch@4.18.0/dist/algoliasearch-lite.umd.js"
-  integrity="sha256-V3GHVlMSAsogT3wL0OY/l4d3fRLa56gNzlnzdIMBIWg="
-  crossorigin="anonymous"></script>
-<script
-  is:inline
-  src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.56.5/dist/instantsearch.production.min.js"
-  integrity="sha256-HUihzhULZfSeNdovzhTpVqRjWABpyZCeeuZAEmMH/VE="
-  crossorigin="anonymous"></script>
-<script is:inline>
-  const algoliaclient = algoliaclient(
-    import.meta.env.ALGOLIA_APP_ID,
-    import.meta.env.ALGOLIA_SEARCH_ONLY_API_KEY,
-    import.meta.env.ALGOLIA_INDEX_NAME
-  )
-
-  const search = instantsearch({
-    indexName: import.meta.env.ALGOLIA_INDEX_NAME,
-    searchClient: algoliaclient
-  })
-  search.addWidgets([
-    instantsearch.widgets.searchBox({
-      container: '#searchbox'
-    }),
-
-    instantsearch.widgets.hits({
-      container: '#hits',
-      templates: {
-        item: `<a href="{{ link }}" class="bg-primary-color text-white p-6 shadow-lg w-full text-center rounded-lg">
-        {{ title }}
-        </a>`
-      }
-    })
-  ])
-
-  instantsearch.widgets.configure({
-    hitsPerPage: 5
-  })
-
-  search.start()
-</script>

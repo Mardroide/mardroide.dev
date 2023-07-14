@@ -12,7 +12,7 @@ const client = algoliasearch(
 
 const index = client.initIndex(process.env.ALGOLIA_INDEX_NAME)
 
-const rss = fs.readFileSync(path.resolve('../dist/rss.xml'), 'utf-8')
+const rss = fs.readFileSync(path.resolve('../rss.xml'), 'utf-8')
 const json = parser.toJson(rss, { object: true })
 
 const posts = json.rss.channel.item.map((post) => ({
